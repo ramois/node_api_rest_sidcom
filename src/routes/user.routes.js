@@ -47,10 +47,10 @@ router.get('/', async (req,res)=>{
 })
 //crear un nuevo libro(recurso) [POST]
 router.post('/', async(req, res)=>{
-    const {email,password,nombre,apellidos,ci,celular}=req?.body
-    if( !email || !password || !nombre || !apellidos || !ci || !celular){
+    const {email,password,nombre,apellidos,ci,celular,rol,id_operador,estado}=req?.body
+    if( !email || !password || !nombre || !apellidos || !ci || !celular || !rol || !id_operador || !estado){
         return res.status(400).json({
-            message: 'Los campos email, contraseña, nombre, apellidos, ci y celular son obligatorios'
+            message: 'Los campos email, contraseña, nombre, apellidos, ci, celular, rol, id operador y estado son obligatorios'
         })
     }
     const user = new User(
@@ -60,7 +60,10 @@ router.post('/', async(req, res)=>{
             nombre,
             apellidos,
             ci,
-            celular
+            celular,
+            rol,
+            id_operador,
+            estado
         }
     )
     try {
@@ -86,6 +89,9 @@ router.put('/:id', getUser, async(req,res) =>{
         user.apellidos=req.body.apellidos || user.apellidos;
         user.ci=req.body.ci || user.ci;
         user.celular=req.body.celular || user.celular;
+        user.rol=req.body.rol || user.rol;
+        user.id_operador=req.body.id_operador || user.id_operador;
+        user.estado=req.body.estado || user.estado;
         const updateUsers= await user.save()
         res.json(updateUsers)
     } catch (error) {
@@ -95,9 +101,9 @@ router.put('/:id', getUser, async(req,res) =>{
     }
 })
 router.patch('/:id', getUser, async(req,res) =>{
-    if (!req.body.email && !req.body.password && !req.body.nombre && !req.body.apellidos && !req.body.ci && !req.body.celular ) {
+    if (!req.body.email && !req.body.password && !req.body.nombre && !req.body.apellidos && !req.body.ci && !req.body.celular && !req.body.rol && !req.body.id_operador && !req.body.estado) {
         res.status(400).json({
-            message:'Al menos uno de estos campos debe ser enviado: email, contraseña, nombre, apellidos, ci y celular'
+            message:'Al menos uno de estos campos debe ser enviado: email, contraseña, nombre, apellidos, ci, celular, rol, id_operador y estado'
         })   
     }
     try {
@@ -109,6 +115,9 @@ router.patch('/:id', getUser, async(req,res) =>{
         user.apellidos=req.body.apellidos || user.apellidos;
         user.ci=req.body.ci || user.ci;
         user.celular=req.body.celular || user.celular;
+        user.rol=req.body.rol || user.rol;
+        user.id_operador=req.body.id_operador || user.id_operador;
+        user.estado=req.body.estado || user.estado;
         const updateUsers= await user.save()
         res.json(updateUsers)
     } catch (error) {
