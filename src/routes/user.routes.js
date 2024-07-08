@@ -32,7 +32,7 @@ const getUser= async (req,res,next)=>{
     res.user=user;
     next()
 }
-//obtener todos los libros 
+//obtener todos los usuarios
 router.get('/', async (req,res)=>{
     try{
         const users = await User.find();

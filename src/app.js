@@ -4,6 +4,7 @@ const bodyParser= require('body-parser')
 const {config}=require('dotenv')
 config()
 const userRoutes = require('./routes/user.routes')
+const operadorRoutes = require('./routes/operador.routes')
 // usamos expres para los middlewares
 const app =express();
 app.use(bodyParser.json()) //parseador de bodies
@@ -13,6 +14,7 @@ mongoose.connect(process.env.MONGO_URL, {dbName: process.env.MONGO_DB_NAME})
 const db=mongoose.connection;
 
 app.use('/users', userRoutes)
+app.use('/operadores', operadorRoutes)
 
 const port=process.env.PORT || 3000
 app.listen(port, ()=>{
