@@ -1,4 +1,5 @@
 const express =require('express')
+const cors=require('cors')
 const mongoose = require('mongoose')
 const bodyParser= require('body-parser')
 const {config}=require('dotenv')
@@ -7,7 +8,8 @@ const userRoutes = require('./routes/user.routes')
 const operadorRoutes = require('./routes/operador.routes')
 // usamos expres para los middlewares
 const app =express();
-app.use(bodyParser.json()) //parseador de bodies
+app.use(bodyParser.json()); //parseador de bodies
+app.use(cors()); //cors para 
 
 //aqui conectamos con la base de datos
 mongoose.connect(process.env.MONGO_URL, {dbName: process.env.MONGO_DB_NAME})
