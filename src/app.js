@@ -6,6 +6,7 @@ const {config}=require('dotenv')
 config()
 const userRoutes = require('./routes/user.routes')
 const operadorRoutes = require('./routes/operador.routes')
+const muestraRoutes = require('./routes/tmuestra.routes')
 // usamos expres para los middlewares
 const app =express();
 app.use(bodyParser.json()); //parseador de bodies
@@ -17,6 +18,7 @@ const db=mongoose.connection;
 
 app.use('/users', userRoutes)
 app.use('/operadores', operadorRoutes)
+app.use('/muestras', muestraRoutes)
 
 const port=process.env.PORT || 3000
 app.listen(port, ()=>{
