@@ -6,10 +6,10 @@ const userSchema =new mongoose.Schema(
         nombre: String,
         apellidos: String,
         ci: String,
-        celular: String,
-        rol: String,
-        id_operador: String,
-        estado: String
+        celular: Number,
+        rol: Number,
+        id_operador: Number,
+        estado: Number
     }
 )
 module.exports=mongoose.model('User', userSchema)
