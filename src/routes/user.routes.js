@@ -48,7 +48,7 @@ router.get('/', async (req,res)=>{
 //crear un nuevo libro(recurso) [POST]
 router.post('/', async(req, res)=>{
     const {email,password,nombre,apellidos,ci,celular,rol,id_operador,estado}=req?.body
-    if( !email || !password || !nombre || !apellidos || !ci || !celular || !rol){
+    if( !email || !nombre || !apellidos || !ci || !celular || !rol){
         return res.status(400).json({
             message: 'Los campos email, contraseña, nombre, apellidos, ci, celular, rol, id operador y estado son obligatorios'
         })

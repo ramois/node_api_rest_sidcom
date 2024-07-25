@@ -1,8 +1,14 @@
 const mongoose =require('mongoose')
+const crypto = require('crypto'); 
 const userSchema =new mongoose.Schema(
     {
         email: String,
-        password: String,
+        password: {
+            type: String,
+            default: "f19854b4",
+            minlength: 6
+        },
+        //password: String,
         nombre: String,
         apellidos: String,
         ci: String,
@@ -19,5 +25,16 @@ const userSchema =new mongoose.Schema(
             default: 0 // Valor predeterminado para el estado
         }
     }
-)
-module.exports=mongoose.model('User', userSchema)
+);
+// Middleware para generar una contraseña aleatoria si id_operador es diferente a null
+userSchema.pre('save', function(next) {
+    if (this.isModified('id_operador') && this.id_operador !== null) {
+        // Generar una contraseña aleatoria
+        const randomPassword = crypto.randomBytes(8).toString('hex');
+        this.password = randomPassword;
+    }
+    next();
+});
+
+module.exports = mongoose.model('User', userSchema);
+
