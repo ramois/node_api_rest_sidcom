@@ -47,8 +47,8 @@ router.get('/', async (req,res)=>{
 })
 //crear un nuevo libro(recurso) [POST]
 router.post('/', async(req, res)=>{
-    const {razon_social,nit,nim_niar,nro_nim,tipo_operador, nro_personeria, nro_matricula_seprec, fecha_exp_seprec, tipo_doc_creacion, doc_creacion, departamento, municipio, direccion, ubicacion, correo_inst, tel_fijo, celular, celular_2, act_exploracion, act_comer_interna, act_comer_externa, act_industrializacion, act_tras_colas,act_explotacion,act_refinacion,act_fundicion,tipo_explotacion,denominacion_area,nro_codigo_unico,nro_cuadricula,municipio_origen,nro_ruex,verif_cert_liberacion,nro_res_ministerial,nombre_resp_for101,ci_resp_for101,celular_resp_for101,correo_resp_for101,nombre_resp_tmuestra,ci_resp_tmuestra,celular_resp_tmuestra,correo_resp_tmuestra}=req?.body
-    if( !razon_social || !nit || !nim_niar || !nro_nim || !tipo_operador  || !nro_matricula_seprec || !fecha_exp_seprec || !tipo_doc_creacion || !departamento || !municipio  || !direccion || !tel_fijo || !celular){
+    const {razon_social,nit,nim_niar,nro_nim,fecha_exp_nim,tipo_operador, nro_personeria, nro_matricula_seprec, fecha_exp_seprec, tipo_doc_creacion, doc_creacion, dl_departamento, dl_municipio, dl_direccion, dl_ubicacion, correo_inst, tel_fijo, celular, celular_2, act_exploracion, act_comer_interna, act_comer_externa, act_industrializacion, act_tras_colas,act_explotacion,act_ben_concentracion,act_refinacion,act_fundicion,tipo_explotacion,denominacion_area,nro_codigo_unico,nro_cuadricula,municipio_origen,nro_ruex,verif_cert_liberacion,nro_res_ministerial,nombre_resp_for101,ci_resp_for101,celular_resp_for101,correo_resp_for101,nombre_resp_tmuestra,ci_resp_tmuestra,celular_resp_tmuestra,correo_resp_tmuestra}=req?.body
+    if( !razon_social || !nit || !nim_niar || !nro_nim || !fecha_exp_nim || !tipo_operador  || !dl_departamento || !dl_municipio || !dl_direccion || !dl_ubicacion || !celular){
         return res.status(400).json({
             message: 'Los campos razon_social, nit, nim_niar, nro_nim, tipo_operador, nro_personeria, nro_matricula_seprec, fecha_exp_seprec, tipo_doc_creacion, doc_creacion, departamento, municipio, direccion, ubicacion, correo_inst, tel_fijo, celular, son obligatorios'
         })
@@ -59,16 +59,17 @@ router.post('/', async(req, res)=>{
             nit,
             nim_niar,
             nro_nim,
+            fecha_exp_nim,
             tipo_operador,
             nro_personeria,
             nro_matricula_seprec,
             fecha_exp_seprec,
             tipo_doc_creacion,
             doc_creacion,
-            departamento,
-            municipio,
-            direccion,
-            ubicacion,
+            dl_departamento,
+            dl_municipio,
+            dl_direccion,
+            dl_ubicacion,
             correo_inst,
             tel_fijo,
             celular,
@@ -79,6 +80,7 @@ router.post('/', async(req, res)=>{
             act_industrializacion,
             act_tras_colas,
             act_explotacion,
+            act_ben_concentracion,
             act_refinacion,
             act_fundicion,
             tipo_explotacion,
